@@ -1,0 +1,26 @@
+.App {
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.button-app {
+  /* margin-top: 200px; */
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background-color: #61dafb;
+}
+
+.inp-app {
+  margin: 10px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
