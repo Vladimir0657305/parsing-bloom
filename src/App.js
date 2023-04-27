@@ -6,26 +6,23 @@ import './App.css';
 
 function App() {
   // let paginator = 11;
-  const [companyData, setCompanyData] = useState(null);
-  let products = [];
   // const lastPage = 14;
+  const [companyData, setCompanyData] = useState(null);
   const [paginator, setPaginator] = useState(0);
   const [lastPage, setLastPage] = useState(1);
   const valueToRemove = 'http://localhost:3000';
-  let hrefValuesArray = [];
 
   const PROXY_URL = 'https://api.allorigins.win/raw?url=';
   const SEARCH_URL = `https://www.bloomberg.com/feeds/bbiz/sitemap_profiles_company_${paginator}.xml`; // URL страницы со списком клиентов
   const NEXT_URL = `https://www.bloomberg.com/markets2/api/datastrip/`;
   const LAST_URL = `?locale=en&customTickerList=true`;
 
-
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleStartChange = (event) => {
     setPaginator(event.target.value);
   };
-  
+
   const handleFinishChange = (event) => {
     setLastPage(event.target.value);
   };
@@ -63,7 +60,7 @@ function App() {
       // Обход списка клиентов
       let ind = 0;
       while (ind < locElements.length - 1) {
-        // while (ind < 3) {
+        // while (ind < 10) {
         let link = locElements[ind].textContent.trim() ?? '';
         console.log(link);
         let linkTo = link.split("/").pop();
@@ -110,10 +107,10 @@ function App() {
 
   return (
     <div >
-      <form className="App">
+      <form className="App" onSubmit={handleSearchSubmit}>
         <input className='inp-app' type="text" value={paginator} onChange={handleStartChange} />
         <input className='inp-app' type="text" value={lastPage} onChange={handleFinishChange} />
-        <button className='button-app' onClick={handleSearchSubmit} >Start parsing Bloomberg_profiles_company</button>
+        <button className='button-app' >Start parsing Bloomberg_profiles_company</button>
       </form>
     </div>
   );
