@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   // let paginator = 11;
   // const lastPage = 14;
-  const [companyData, setCompanyData] = useState(null);
+  // const [companyData, setCompanyData] = useState(null);
   const [paginator, setPaginator] = useState(2);
   const [lastPage, setLastPage] = useState(10);
   const valueToRemove = 'http://localhost:3000';
@@ -75,9 +75,9 @@ function App() {
         let response = await fetch(`${PROXY_URL}${NEXT_URL}${linkTo}${LAST_URL}`);
         let html2 = await response.json();
         console.log(html2);
-        setCompanyData(html2);
+        // setCompanyData(html2);
 
-        let clientDoc = parser.parseFromString(html2, 'text/html');
+        // let clientDoc = parser.parseFromString(html2, 'text/html');
         // console.log(clientDoc);
         // Получение данных клиента
         let title = html2[0]['name'];
@@ -90,7 +90,7 @@ function App() {
         let website = html2[0]['companyWebsite'];
         let foundedYear = html2[0]['foundedYear'];
 
-        const row = `${link},${title},${sector},${subSector},${address},${description},${phone},${website},${foundedYear}\n`;
+        let row = `${link},${title},${sector},${subSector},${address},${description},${phone},${website},${foundedYear}\n`;
         csvContent += row;
         ind++;
       };
