@@ -8,12 +8,12 @@ function App() {
   // let paginator = 11;
   // const lastPage = 14;
   const [companyData, setCompanyData] = useState(null);
-  const [paginator, setPaginator] = useState(0);
-  const [lastPage, setLastPage] = useState(1);
+  const [paginator, setPaginator] = useState(2);
+  const [lastPage, setLastPage] = useState(10);
   const valueToRemove = 'http://localhost:3000';
 
   const PROXY_URL = 'https://api.allorigins.win/raw?url=';
-  const SEARCH_URL = `https://www.bloomberg.com/feeds/bbiz/sitemap_profiles_company_${paginator}.xml`; // URL страницы со списком клиентов
+  let SEARCH_URL = `https://www.bloomberg.com/feeds/bbiz/sitemap_profiles_company_${paginator}.xml`; // URL страницы со списком клиентов
   const NEXT_URL = `https://www.bloomberg.com/markets2/api/datastrip/`;
   const LAST_URL = `?locale=en&customTickerList=true`;
 
@@ -40,6 +40,8 @@ function App() {
   };
 
   const parseSite = async (paginator) => {
+    console.log('paginator=', paginator);
+    console.log('lastpage=', lastPage);
     // const PROXY_URL = 'https://cors-anywhere.herokuapp.com/'; // Прокси-сервер для обхода CORS
     // const PROXY_URL = 'https://api.allorigins.win/raw?url='; 
     // const SEARCH_URL = `https://www.bloomberg.com/feeds/bbiz/sitemap_profiles_company_${paginator}.xml`;
@@ -48,13 +50,13 @@ function App() {
       // Загрузка страницы со списком клиентов
       const delayTime = Math.floor(Math.random() * 3001) + 2000;
       await delay(delayTime);
-      const response = await fetch(`${PROXY_URL}${SEARCH_URL}`);
-      const html = await response.text();
+      let response = await fetch(`${PROXY_URL}${SEARCH_URL}`);
+      let html = await response.text();
 
       // Парсинг страницы
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const locElements = doc.querySelectorAll('loc');
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(html, 'text/html');
+      let locElements = doc.querySelectorAll('loc');
       // console.log(locElements);
 
       // Обход списка клиентов
@@ -97,7 +99,7 @@ function App() {
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement('a');
       link.setAttribute('href', encodedUri);
-      link.setAttribute('download', `clients${paginator}.csv`);
+      link.setAttribute('download', `clients_${paginator}.csv`);
       document.body.appendChild(link);
       link.click();
     } catch (error) {
