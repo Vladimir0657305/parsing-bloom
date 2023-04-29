@@ -35,7 +35,10 @@ function App() {
       const delayTime2 = Math.floor(Math.random() * 3001) + 3000;
       await delay(delayTime2);
       await parseSite(paginator);
-      paginator++;
+      let temp = paginator;
+      temp++;
+      setPaginator(temp);
+      // paginator++;
     }
   };
 
